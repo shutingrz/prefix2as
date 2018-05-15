@@ -1,0 +1,54 @@
+[SYSTEM]
+## this tool use bgpdump.
+## Please install bgpdump and set path.
+#bgpdump_path = bgpdump
+
+## Max routing history
+## You can choose how many routing history to save.
+## For your reference, a fullroute data is about 50MB.
+## if set 0, will not delete the DB.
+## Warning: 
+##  prefix2as output routes of a whole period at now, so there might will be output data is huge.
+#max_history = 1
+
+[DB]
+#dburl = mysql+pymysql://{username}:{password}@{host}:{port}/{dbname}?charset=utf8
+
+[MRT]
+profile = WIDE
+#profile = Local
+
+[Local]
+type = Local
+## relative path example
+#url = file://~/rib.20180101.23
+
+## full path example
+#url = file:///tmp/rib.20180101.23
+
+##time format (strftime)
+## ex. rib.${%%Y}${%%m}${%%d}.${%%H}00 => rib.20180101.2300
+#url = file:///tmp/rib.${%%Y}${%%m}${%%d}.${%%H}00
+
+## if MRT data contains multi-fullroute (multihome), you can select one by peer as.
+#peer_as = 
+#peer_as = 2497
+
+## auto delete the MRT file after importing it to Database.
+#autodelete = 0
+
+[WIDE]
+type = RouteViews
+
+##time format (strftime)
+## ex. rib.${%%Y}${%%m}${%%d}.${%%H}00 => rib.20180101.2300
+url = http://archive.routeviews.org/route-views.wide/bgpdata/${%%Y}.${%%m}/RIBS/rib.${%%Y}${%%m}${%%d}.${%%H}00.bz2
+
+## if MRT data contains multi-fullroute (multihome), you can select one by peer as.
+## "route-views.wide.routeviews.org" is multihome (AS2497/IIJ and AS7500/WIDE). 
+## So you can select 2497 or 7500
+peer_as = 2497
+
+## auto delete the MRT file after importing it to Database.
+autodelete = 1
+

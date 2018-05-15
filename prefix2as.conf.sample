@@ -1,0 +1,6 @@
+#[Server]
+LISTEN = '0.0.0.0'
+PORT = '8001'
+
+#[DB]
+#DBURL = 'mysql+pymysql://{username}:{password}@{host}:{port}/{dbname}?charset=utf8'

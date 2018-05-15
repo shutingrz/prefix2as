@@ -18,7 +18,7 @@ class Prefix2asModel(object):
 		except sqlalchemy.exc.NoSuchTableError as exc:
 			current_app.logger.critical("route4 table is not exist. please exec updateRouting.py")
 			return None, None
-		except sqlalchemy.exc.NoSuchTableError as exc:
+		except Exception as exc:
 			current_app.logger.critical("Unknown OR/M error: %s" % exc)
 			raise Exception(exc)
 
@@ -39,7 +39,7 @@ class Prefix2asModel(object):
 
 		#if route is not found.
 		if len(data) < 1:
-			return None, 110
+			return [], 0
 
 		#get best path (min size)
 		size_tmparray = []
